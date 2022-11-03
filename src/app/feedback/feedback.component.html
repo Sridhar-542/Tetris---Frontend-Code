@@ -1,0 +1,69 @@
+<p-card>
+  <div class="flex justify-content-center align-items-center">
+    <h1 style="color: #2196F3;">Experience questionnaire</h1>
+  </div>
+  <div class="flex justify-content-center align-items-center">
+    <p-card styleClass="questionCard">
+      <p class="question"> 1. On a scale of one to five, how much do you like playing the game with this background music?&nbsp;<span style="color: red;">*</span></p>
+      <div class="flex align-items-center">
+        <span class="ratingLabel">(Most unlikely)</span>
+        <p-selectButton [options]="justifyOptions" optionValue="key" [(ngModel)]="question1">
+          <ng-template let-item>
+            <h3 style="margin:0px">{{item.value}}</h3>
+          </ng-template>
+        </p-selectButton>
+        <span class="ratingLabel">(Most likely)</span>
+      </div>
+    </p-card>
+  </div>
+  <br>
+  <div class="flex justify-content-center align-items-center">
+    <p-card styleClass="questionCard">
+      <p class="question">2. Do you think that the music played at the background helped you to play better?&nbsp;<span style="color: red;">*</span></p>
+      <div class="flex align-items-center">
+        <span class="ratingLabel">(Most unlikely)</span>
+        <p-selectButton [options]="justifyOptions" optionValue="key" [(ngModel)]="question2">
+          <ng-template let-item>
+            <h3 style="margin:0px">{{item.value}}</h3>
+          </ng-template>
+        </p-selectButton>
+        <span class="ratingLabel">(Most likely)</span>
+      </div>
+    </p-card>
+  </div>
+  <br>
+  <div class="flex justify-content-center align-items-center">
+    <p-card styleClass="questionCard">
+        <p class="question"> 3. Do you like the music that was played at the background?&nbsp;<span style="color: red;">*</span></p>
+        <div *ngFor="let option of radioOptions" class="field-checkbox">
+            <p-radioButton [inputId]="option.key" name="option" [(ngModel)]="question3" [value]="option.key" >
+            </p-radioButton>
+            <label [for]="option.key">{{option.name}}</label>
+        </div>
+    </p-card>
+</div>
+<br>
+
+  <div class="flex justify-content-center align-items-center">
+    <p-card styleClass="questionCard">
+      <p class="question">4. How do you rate your overall experience in playing the game with this background music?&nbsp;<span style="color: red;">*</span></p>
+      <div class="flex align-items-center">
+        <span class="ratingLabel">(Most unlikely)</span>
+        <p-selectButton [(ngModel)]="question4" [options]="justifyOptions" optionValue="key">
+          <ng-template let-item>
+            <h3 style="margin:0px">{{item.value}}</h3>
+          </ng-template>
+        </p-selectButton>
+        <span class="ratingLabel">(Most likely)</span>
+      </div>
+    </p-card>
+  </div>
+  <br>
+  <div class="flex justify-content-center align-items-center" *ngIf="question1!=''&&question2!=''&&question3!=''&&question4!=''">
+    <p-card styleClass="questionCard">
+        <div class="flex justify-content-end">
+            <p-button label="Submit" (click)="submitFeedback()"></p-button>
+        </div>
+    </p-card>
+</div>
+</p-card>

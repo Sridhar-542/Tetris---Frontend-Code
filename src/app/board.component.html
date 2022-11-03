@@ -1,0 +1,76 @@
+<div class="grid justify-content-center">
+    <div class="col-12 md:col-2 lg:col-2 grid justify-content-center">
+        <p-card styleClass="card">
+            <div class="contentCenter">
+                <h2 style="margin:0px">CONTROLS</h2>
+            </div>
+            <br>
+            <div class="contentCenter">
+                <i class="pi pi-arrow-up" style="font-size: 1.6rem"></i>
+            </div>
+            <div class="contentCenter" style="display: flex;">
+                <i class="pi pi-arrow-left" style="font-size: 1.6rem"></i>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <i class="pi pi-arrow-right" style="font-size: 1.6rem"></i>
+            </div>
+            <div class="contentCenter">
+                <i class="pi pi-arrow-down" style="font-size: 1.6rem"></i>
+            </div>
+            <br>
+            <div class="contentCenter">
+                <div class="controls">
+                <p class="key">Left and Right:</p>
+                <p>move side to side</p>
+                <p class="key">Up:</p>
+                <p>rotate</p>
+                <p class="key">Down:</p>
+                <p>fall faster</p>
+                <p class="key">Play:</p>
+                <p>start the game</p>
+                <p class="key">Pause:</p>
+                <p>pause the game</p>
+                </div>
+            </div>
+        </p-card>
+    </div>
+    <div class="col-12 md:col-4 lg:col-4 grid justify-content-center" style="padding-top: 2rem">
+        <p-card>
+            <div>
+                <canvas #board class="game-board"></canvas>
+            </div>
+        </p-card>
+
+    </div>
+    <div class="col-12 md:col-2 lg:col-2 grid justify-content-center">
+        <p-card styleClass="card">
+            <div class="contentCenter">
+                <h2 style="margin:0px;align-content: center;">TETRIS</h2>
+            </div>
+            <br>
+            <div class="contentCenter">
+                <div class="score">
+                    <p>Score: {{ level*15 }}</p>
+                </div>
+                <div class="score">
+                <p>Lines: {{ level }}</p>
+            </div>
+            <div class="score">
+                <p>Level: {{ levelCal }}</p>
+            </div>
+            <!-- <div class="score">
+                <p>High Score: {{ highScore }}</p>
+            </div> -->
+            <div class="score" style="display: block;">
+                <div class="contentCenter"><p>Next Block:</p></div>
+                <canvas #next class="next"></canvas>
+            </div>
+            </div>
+            <div class="contentCenter" style="margin-top:5px">
+                <button (click)="play();music()" pButton *ngIf="!showContinue&&!gameStarted">Play</button>
+                <button (click)="nextPage()" pButton *ngIf="showContinue">
+                    Continue
+                </button>
+            </div>
+        </p-card>
+    </div>
+</div>

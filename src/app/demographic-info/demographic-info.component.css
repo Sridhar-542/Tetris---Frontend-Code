@@ -1,0 +1,30 @@
+::ng-deep .questionCard {
+    min-width: 43vw;
+    /* max-width: 43vw; */
+}
+::ng-deep .p-card .p-card-content {
+     padding: 0 0; 
+}
+.question{
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+/* Rating Scale */
+::ng-deep .p-buttonset .p-button:not(:first-of-type):not(:last-of-type) {
+    margin: 20px;
+    border: solid 1.5px #2196F3;
+    border-radius: 50% !important;
+    }
+    ::ng-deep .p-buttonset .p-button:last-of-type,::ng-deep .p-buttonset .p-button:first-of-type{
+      display: none;
+    }
+    .ratingLabel{
+      font-size: 1rem;
+      font-weight: 600;
+    }
+    ::ng-deep .questionCard {
+      min-width: 95vw;
+    }
+    ::ng-deep .p-card .p-card-content {
+       padding: 0 0; 
+    }

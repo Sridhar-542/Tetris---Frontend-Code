@@ -1,0 +1,82 @@
+<p-card>
+    <div class="flex justify-content-center align-items-center">
+        <h1 style="color: #2196F3;">Demographic Information </h1>
+    </div>
+    <div class="flex justify-content-center align-items-center">
+        <p-card styleClass="questionCard">
+            <p class="question"> 1. How old are you?&nbsp;<span style="color: red;">*</span></p>
+            <div *ngFor="let option of ageOptions" class="field-checkbox">
+                <p-radioButton [inputId]="option.key" name="option" [(ngModel)]="age" [value]="option.key">
+                </p-radioButton>
+                <label [for]="option.key">{{option.name}}</label>
+            </div>
+        </p-card>
+    </div>
+    <br>
+    <div class="flex justify-content-center align-items-center">
+        <p-card styleClass="questionCard">
+            <p class="question"> 2. With which gender do you identify yourself?&nbsp;<span style="color: red;">*</span>
+            </p>
+            <div *ngFor="let option of genderOptions" class="field-checkbox">
+                <p-radioButton [inputId]="option.key" name="option" [(ngModel)]="gender" [value]="option.key" (onClick)="genderDes=''">
+                </p-radioButton>
+                <label [for]="option.key">{{option.name}}</label>
+            </div>
+            <div *ngIf="gender=='E'">
+                <input type="text" pInputText [(ngModel)]="genderDes" />
+            </div>
+        </p-card>
+    </div>
+    <br>
+    <div class="flex justify-content-center align-items-center">
+        <p-card styleClass="questionCard">
+            <p class="question"> 3. Nationality?&nbsp;<span style="color: red;">*</span><br><br>
+                <input type="text" pInputText [(ngModel)]="nationality" />
+        </p-card>
+    </div>
+    <br>
+    <div class="flex justify-content-center align-items-center">
+        <p-card styleClass="questionCard">
+            <p class="question"> 4. Have you ever played Tetris game before?&nbsp;<span style="color: red;">*</span>
+            </p>
+            <div *ngFor="let option of isPlayedOptions" class="field-checkbox">
+                <p-radioButton [inputId]="option.key" name="option" [(ngModel)]="played" [value]="option.key"  (onClick)="expLevel=''">
+                </p-radioButton>
+                <label [for]="option.key">{{option.name}}</label>
+            </div>
+            <div *ngIf="played=='A'">
+                <p class="question">What is your level of experience in playing Tetris?&nbsp;<span style="color: red;">*</span><br>
+                    <!-- <input type="text" pInputText [(ngModel)]="expLevel" /> -->
+                    <div class="flex align-items-center">
+                        <span class="ratingLabel">Little experienced</span>
+                        <p-selectButton [options]="justifyOptions" optionValue="key" [(ngModel)]="expLevel">
+                          <ng-template let-item>
+                            <h3 style="margin:0px">{{item.value}}</h3>
+                          </ng-template>
+                        </p-selectButton>
+                        <span class="ratingLabel">Highly experienced</span>
+                      </div>
+            </div>
+        </p-card>
+    </div>
+    <br>
+    <div class="flex justify-content-center align-items-center">
+        <p-card styleClass="questionCard">
+            <p class="question"> 5. Which input do you usually use to play Tetris?&nbsp;<span style="color: red;">*</span></p>
+            <div *ngFor="let option of inputOptions" class="field-checkbox">
+                <p-radioButton [inputId]="option.key" name="option" [(ngModel)]="input" [value]="option.key">
+                </p-radioButton>
+                <label [for]="option.key">{{option.name}}</label>
+            </div>
+        </p-card>
+    </div>
+    <br>
+    <div class="flex justify-content-center align-items-center"
+        *ngIf="age!=''&&gender!=''&&played!=''&&((gender=='E'&&genderDes!='')||gender!='E')&&nationality!=''&&((played=='A'&&expLevel!='')||played!='A')&&input!=''">
+        <p-card styleClass="questionCard">
+            <div class="flex justify-content-end">
+                <p-button label="Submit" (click)="nextPage()"></p-button>
+            </div>
+        </p-card>
+    </div>
+</p-card>

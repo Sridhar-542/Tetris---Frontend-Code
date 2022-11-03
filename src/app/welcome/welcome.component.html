@@ -1,0 +1,84 @@
+<div class="flex justify-content-center align-items-center" style="height: 80vh">
+    <div style="width: 80vw;">
+        <p-panel header="Effect of Music On Performance in Gameplay  ">
+            <p class="sideHeading">Participation information :</p>
+            Thank you for participating in our study. In this survey, we would like to assess your
+            performance and experience while playing “Tetris” game with
+            different music tracks played at the background. This study consists of three parts.
+            In each part, you have to play the Tetris game and fill the questionnaire related to your overall
+            performance.
+            It will take about 15-20 minutes to complete the study. The goal of this study is to determine your
+            performance
+            and experience while playing the Tetris game with different music tracks.
+            Your data will be stored and processed anonymously. More information on the data protection can
+            be found in the <a (click)="display=true" style="color: blue;cursor:pointer">Data Protection Notice</a>
+            This survey is being conducted by Sridhar Karra as part of a master thesis
+            <p class="sideHeading">Notes on data protection and participation information :</p>
+            <p-checkbox name="groupname" binary="true" (onChange)="enableButton($event)"></p-checkbox>&nbsp;&nbsp;I have
+            read and understood the <a (click)="display=true" style="color: blue;cursor:pointer">notes on data
+                protection </a> and the participation
+            information and agree that my data may be used anonymously for scientific research purposes.
+            <div class="flex justify-content-end" *ngIf="checked">
+                <p-button label="Submit" (click)="nextPage()"></p-button>
+            </div>
+        </p-panel>
+    </div>
+    <p-dialog header="Data Protection Notice " [(visible)]="display" [style]="{width: '60vw'}" modal="true">
+        <p-scrollPanel [style]="{width: '100%', height: '300px'}">
+            <p class="subHeading">General information</p>
+           
+                The following study is part of a master thesis at the Deutschen Forschungszentrum für Künstliche
+                Intelligenz (DFKI) and Universität des Saarlandes (UdS).
+           
+            <p class="subHeading">Voluntary participation and consent</p>
+   
+                Participation in the study is voluntary. Consent to participate in this
+                study can be revoked at any time and without giving reasons until the end of the data
+                collection by ending the survey (a corresponding button is available on the website) or closing the
+                browser window.
+                All incomplete data records will be deleted by us. After the end of the data collection, the legal
+                rights of revocation,
+                information, correction,
+                blocking and deletion can no longer be exercised, because the data can no longer be assigned to the data
+                subject.
+            
+            <p class="subHeading">What data do we collect?</p>
+            After consenting to the data collection, the following data will be collected and processed anonymously
+            only:
+            <ul>
+                <li>Input in the online survey</li>
+            </ul>
+            For technical reasons, the following data, among other things,
+            which are transmitted from the Internet browser to us or to our web space provider, are recorded (so-called
+            server log files):
+            <ul>
+                <li>Browser type and version</li>
+                <li>Operating system used</li>
+                <li> Website previously visited (referrer URL)</li>
+                <li> Date and time of access</li>
+                <li> Internet Protocol (IP) address</li>
+            </ul>
+            This anonymous data is not merged with the survey data. On this website we
+             use so-called cookies. Cookies are small files that are stored by your web browser.
+              The cookies used on our website do not cause any harm to your computer and do not contain
+               any malware. They enable a user-friendly and effective use of this website. We use permanent 
+            cookies with a maximum validity period of 365 days. We use these cookies exclusively to exclude multiple participation.     
+            <p class="subHeading">Anonymization of data</p>
+            With the transmission of the collected data to our server, an anonymization takes place,
+             which makes an allocation of the collected data to a person practically impossible, if no personal
+              data are entered in free text fields.
+            <p class="subHeading"> What do we use the collected data for?</p>
+            The results and data will be used exclusively for scientific research purposes 
+            and they will be published in anonymous form as part of the final thesis and as a scientific
+             publication of this study. Furthermore, they can be further processed in anonymous form for other
+              scientific research purposes.
+            <p class="subHeading">Contact persons</p>
+            The contact persons are Sridhar Karra (s8srkarr@stud.uni-saarland.de),
+             Marc schubhan (marc.schubhan@dfki.de) and Maximilian Altmeyer (maximilian.altmeyer@dfki.de).
+              If you have any questions that are not answered in this privacy statement or would like further
+               information on data protection, please contact us. 
+            Right of complaint
+            <p class="subHeading"> Right of complaint</p>
+            You have the right to lodge a complaint with a supervisory authority if you believe that the processing of your personal data violates legal data protection regulations.
+        </p-scrollPanel>
+    </p-dialog>

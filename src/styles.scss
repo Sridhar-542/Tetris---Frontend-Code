@@ -1,0 +1,76 @@
+/* You can add global styles to this file, and also import other style files */
+// * {
+//   font-family: 'Press Start 2P', cursive;
+// }
+
+.grid {
+  display: grid;
+  grid-template-columns: 320px 200px;
+}
+
+.right-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 300px;
+}
+
+.game-board {
+  border: solid 2px;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  .play-button {
+    background-color: #4caf50;
+  }
+
+  .reset-button {
+    background-color: red;
+  }
+
+  .pause-button {
+    background-color: #4caf50;
+
+    &.button-disabled {
+      background-color: #cccccc;
+    }
+  }
+
+  .button {
+    font-size: 16px;
+    padding: 15px 30px;
+    cursor: pointer;
+    width: 140px; 
+    border: 1px solid black;
+  }
+}
+.card{
+  margin-top:1.6rem;
+  width: 15rem;
+}
+.contentCenter{
+  display: grid;
+  justify-content: center;
+  .controls{
+    p{
+      margin:7px;
+      font-size: 1.2rem;
+    }
+    .key{
+      font-size: 1.5rem;
+      font-weight: 550;
+    }
+  }
+}
+.score{
+    border: solid 2px;
+    justify-content: center;
+    border-radius: 17px;
+    display: flex;
+    margin:2px;
+    font-size: 1.2rem;
+}
