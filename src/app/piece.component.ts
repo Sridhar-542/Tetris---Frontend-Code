@@ -14,8 +14,7 @@ export class Piece implements IPiece {
   colorLighter: string;
   colorDarker: string;
   shape: number[][];
-
-  constructor(private ctx: CanvasRenderingContext2D) {
+  constructor(private ctx: CanvasRenderingContext2D,private seed) {
     this.spawn();
   }
 
@@ -111,6 +110,6 @@ export class Piece implements IPiece {
   }
 
   randomizeTetrominoType(noOfTypes: number): number {
-    return Math.floor(Math.random() * noOfTypes + 1);
+    return Math.floor(this.seed * noOfTypes + 1);
   }
 }

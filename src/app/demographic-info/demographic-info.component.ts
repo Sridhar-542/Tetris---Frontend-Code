@@ -39,12 +39,12 @@ export class DemographicInfoComponent implements OnInit {
     { key: '', value: '' },
   ];
   ageOptions: any[] = [{name:'18 - 24', key: 'A'}, {name: '25 - 31', key: 'B'}, {name: '32 - 38', key: 'C'}, {name: '39 - 45', key: 'D'}, {name: '46 - 52', key: 'E'},{name: '53 - 59', key: 'F'},{name: '60 and above', key: 'G'}];
-  genderOptions: any[] = [{name:'Male', key: 'A'}, {name: 'Female', key: 'B'}, {name: 'Binary', key: 'C'}, {name: 'Prefer not to disclose', key: 'D'},{name: 'Self-describe', key: 'E'}];
+  genderOptions: any[] = [{name:'Male', key: 'A'}, {name: 'Female', key: 'B'}, {name: 'Non-Binary', key: 'C'}, {name: 'Prefer not to disclose', key: 'D'},{name: 'Self-describe', key: 'E'}];
   isPlayedOptions: any[]=[{name:'Yes', key: 'A'}, {name: 'No', key: 'B'}]
   inputOptions: any[] = [{name:'Keyboard', key: 'A'}, {name: 'Gamepad', key: 'B'}, {name: 'Touchscreen', key: 'C'}, {name: 'Other', key: 'D'}];
   constructor(private router:Router) { 
     this.lastPage=localStorage.getItem("currentPage")
-    if (this.lastPage!="gameInstr") {
+    if (this.lastPage!="home") {
       this.router.navigate([this.lastPage]);  
     }
   }

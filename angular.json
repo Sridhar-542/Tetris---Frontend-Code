@@ -13,11 +13,18 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "lodash",
+              "rxjs-compat",
+              "highcharts",
+              "random-seed"
+           ],
             "outputPath": "dist/ng-tetris",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
+            
             "assets": [
               "src/favicon.ico",
               "src/assets"
@@ -93,3 +100,4 @@
     "analytics": false
   }
 }
+

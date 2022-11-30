@@ -12,6 +12,7 @@ import { DemographicInfoComponent } from './demographic-info/demographic-info.co
 import { FeedbackComponent } from './feedback/feedback.component';
 import { InstructionsComponent } from './instructions/instructions.component';
 import {PanelModule} from 'primeng/panel';
+import {ToastModule} from 'primeng/toast';
 import {CheckboxModule} from 'primeng/checkbox';
 import { FormsModule } from '@angular/forms';
 import { MainInstructionsComponent } from './main-instructions/main-instructions.component';
@@ -23,6 +24,7 @@ import {InputTextModule} from 'primeng/inputtext';
 import {ScrollPanelModule} from 'primeng/scrollpanel';
 import { ThankyouComponent } from './thankyou/thankyou.component';
 import { TutorialInstructionsComponent } from './tutorial-instructions/tutorial-instructions.component';
+import {InputTextareaModule} from 'primeng/inputtextarea';
 @NgModule({
   declarations: [AppComponent, BoardComponent, WelcomeComponent, DemographicInfoComponent, FeedbackComponent, InstructionsComponent, MainInstructionsComponent, ThankyouComponent, TutorialInstructionsComponent],
   imports: [BrowserModule,
@@ -37,7 +39,10 @@ import { TutorialInstructionsComponent } from './tutorial-instructions/tutorial-
     DialogModule,
     ScrollPanelModule,
     InputTextModule,
-    SelectButtonModule],
+    SelectButtonModule,
+    ToastModule,
+    InputTextareaModule
+  ],
     
   providers: [],
   bootstrap: [AppComponent]

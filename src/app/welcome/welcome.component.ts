@@ -27,6 +27,6 @@ export class WelcomeComponent implements OnInit {
    this.checked=data.checked;
   }
   nextPage(){
-    this.router.navigate(["gameInstr"]); 
+    this.router.navigate(["info"]); 
   }
 }

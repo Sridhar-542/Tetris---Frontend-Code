@@ -8,7 +8,7 @@ As a part of master thesis I developed an extend version for the tetris game wit
 
 Run `npm install` to install the required npm packages
 
-Run `npm start` for a dev server. 
+Run `npm start` for a dev server.
 
 ## Frontend
 

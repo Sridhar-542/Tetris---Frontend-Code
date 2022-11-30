@@ -20,6 +20,7 @@ import {
 import { Piece, IPiece } from './piece.component';
 import { GameService } from './game.service';
 import { Router } from '@angular/router';
+import { RandomSeedService } from './random-seed.service';
 
 @Component({
   selector: 'game-board',
@@ -37,7 +38,8 @@ export class BoardComponent implements OnInit {
   next: Piece;
   requestId: number;
   paused: boolean;
-  levelCal: number=0;
+  levelCal: number = 0;
+  seed = new RandomSeedService;
 
   gameStarted: boolean;
   time: { start: number; elapsed: number; level: number };
@@ -62,7 +64,7 @@ export class BoardComponent implements OnInit {
   lastPage: string;
   audio: HTMLAudioElement;
   currentMode: string;
-  modes: any=[];
+  modes: any = [];
   showContinue: boolean;
   isTutorial: string;
   @HostListener("window:beforeunload", ["$event"]) unloadHandler(event: Event) {
@@ -73,8 +75,8 @@ export class BoardComponent implements OnInit {
   onPopState(event) {
     this.storeGameData();
     event.preventDefault();
-    this.audio.pause() ;
-    
+    this.audio.pause();
+
   }
   @HostListener('window:keydown', ['$event'])
   keyEvent(event: KeyboardEvent) {
@@ -117,8 +119,8 @@ export class BoardComponent implements OnInit {
   constructor(private service: GameService, private router: Router) {
     // this.pause()
     this.lastPage = localStorage.getItem("currentPage")
-    let isTutorial= localStorage.getItem("isTutorial")
-    if (((this.lastPage == "tutInstructions"&&isTutorial!='true')||(this.lastPage == "instructions"&&isTutorial!='false'))) {
+    let isTutorial = localStorage.getItem("isTutorial")
+    if (((this.lastPage == "tutInstructions" && isTutorial != 'true') || (this.lastPage == "instructions" && isTutorial != 'false'))) {
       this.router.navigate([this.lastPage]);
     }
     if (this.lastPage != "tutInstructions") {
@@ -130,38 +132,38 @@ export class BoardComponent implements OnInit {
 
   ngOnInit() {
     // this.pause()
-    this.isTutorial=this.lastPage=localStorage.getItem("isTutorial")
+    this.isTutorial = this.lastPage = localStorage.getItem("isTutorial")
     this.selectGameMode();
     localStorage.setItem("currentPage", "tetris")
     localStorage.getItem("score") == null ? localStorage.setItem("score", JSON.stringify([])) : '';
-    
+
   }
-   getOccurrence(array, value) {
+  getOccurrence(array, value) {
     var count = 0;
     array.forEach((v) => (v === value && count++));
     return count;
-}
+  }
   //To select game mode randomly 
   //need to toggle isModeSelected after feedback submitted
-  selectGameMode(){
-    let isModeSelected=localStorage.getItem("isModeSelected")
-    if (isModeSelected=='false'||isModeSelected==null) {
-      this.modes=JSON.parse(localStorage.getItem("modes"))
+  selectGameMode() {
+    let isModeSelected = localStorage.getItem("isModeSelected")
+    if (isModeSelected == 'false' || isModeSelected == null) {
+      this.modes = JSON.parse(localStorage.getItem("modes"))
       var selectMode;
       if (this.isTutorial == "true") {
         selectMode = "tutorial"
-        localStorage.setItem("times","1")
+        localStorage.setItem("times", "1")
       }
       else {
-        selectMode = this.modes.indexOf(localStorage.getItem("currentMode"))==-1?this.modes[Math.floor(Math.random() * this.modes.length)]:localStorage.getItem("currentMode");
+        selectMode = this.modes.indexOf(localStorage.getItem("currentMode")) == -1 ? this.modes[Math.floor(Math.random() * this.modes.length)] : localStorage.getItem("currentMode");
         //to know repeated or not
-        (this.getOccurrence(this.modes,localStorage.getItem("currentMode"))==1&&localStorage.getItem("currentMode")!="tutorial")?localStorage.setItem("times","2"):localStorage.setItem("times","1")
+        (this.getOccurrence(this.modes, localStorage.getItem("currentMode")) == 1 && localStorage.getItem("currentMode") != "tutorial") ? localStorage.setItem("times", "2") : localStorage.setItem("times", "1")
         this.modes.splice(this.modes.indexOf(selectMode), 1)
       };
       // isTutorial!="true"?this.modes.splice(this.modes.indexOf(selectMode), 1):null;
-       localStorage.setItem("modes",JSON.stringify(this.modes))
-       localStorage.setItem("currentMode",selectMode)
-       localStorage.setItem("isModeSelected","true")
+      localStorage.setItem("modes", JSON.stringify(this.modes))
+      localStorage.setItem("currentMode", selectMode)
+      localStorage.setItem("isModeSelected", "true")
     }
     this.initBoard();
     // this.initSound();
@@ -169,16 +171,33 @@ export class BoardComponent implements OnInit {
     this.resetGame();
     this.highScore = 0;
     this.initMusic();
+    this.initSeed();
+  }
+  //for adding random seeding based on given conditions
+  initSeed() {
+    this.currentMode = localStorage.getItem("currentMode");
+    let remainingModes=localStorage.getItem("modes");    
+    if (this.currentMode == "tutorial") {
+      this.seed.seedString = "Saarbrücken"
+      this.seed.setString()
+    } else if (this.currentMode != "tutorial" && remainingModes.includes(this.currentMode)) {
+      this.seed.seedString = "Neunkirchen"
+      this.seed.setString()
+    }
+    else {
+      this.seed.seedString = "Frankfurt"
+      this.seed.setString()
+    }    
   }
   //for Initializing music
   initMusic() {
-    this.currentMode=localStorage.getItem("currentMode");
-    if(this.currentMode!=null){
+    this.currentMode = localStorage.getItem("currentMode");
+    if (this.currentMode != null) {
       // localStorage.getItem("modes");
       // this.audio = new Audio();
       // this.audio.src = "../assets/music1.mp3";
       // this.audio.load();
-      if(this.currentMode!="withoutMusic"){
+      if (this.currentMode != "withoutMusic") {
         this.audio = new Audio();
         this.audio.src = `../assets/${this.currentMode}.mp3`;
         this.audio.loop = true;
@@ -216,8 +235,8 @@ export class BoardComponent implements OnInit {
       this.gameStarted = true;
       this.initGame = true;
       this.resetGame();
-      this.next = new Piece(this.ctx);
-      this.piece = new Piece(this.ctx);
+      this.next = new Piece(this.ctx, this.seed.randomSeed());
+      this.piece = new Piece(this.ctx, this.seed.randomSeed());
       this.next.drawNext(this.ctxNext);
       this.time.start = performance.now();
 
@@ -275,7 +294,7 @@ export class BoardComponent implements OnInit {
       }
       // this.playSoundFn([, , 224, .02, .02, .08, 1, 1.7, -13.9, , , , , , 6.7]);
       this.piece = this.next;
-      this.next = new Piece(this.ctx);
+      this.next = new Piece(this.ctx, this.seed.randomSeed());
       this.next.drawNext(this.ctxNext);
     }
     return true;
@@ -298,8 +317,8 @@ export class BoardComponent implements OnInit {
         //To get level for each 3 lines clear level will increase
         this.levelCal = Math.floor(this.level / 3)
         this.lines -= 1;
-        if(this.levelCal>=1){
-        this.time.level = LEVEL[this.levelCal]/2;
+        if (this.levelCal >= 1) {
+          this.time.level = LEVEL[this.levelCal] / 2;
         }
       }
     }
@@ -366,7 +385,6 @@ export class BoardComponent implements OnInit {
           this.ctx.fillStyle = COLORS[value];
           this.ctx.fillRect(x, y, 1, 1);
           this.add3D(x, y, value);
-          //console.log(this.ctx);
         }
       });
     });
@@ -397,10 +415,10 @@ export class BoardComponent implements OnInit {
     this.ctx.font = '1px Arial';
     this.ctx.fillStyle = 'red';
     this.ctx.fillText('GAME OVER', 1.8, 4);
-    if(this.currentMode!="withoutMusic"){
-       this.audio.pause()
+    if (this.currentMode != "withoutMusic") {
+      this.audio.pause()
     }
-    this.showContinue=true;
+    this.showContinue = true;
   }
 
   getEmptyBoard(): number[][] {
@@ -411,34 +429,33 @@ export class BoardComponent implements OnInit {
     this.storedData = JSON.parse(localStorage.getItem("score"));
     this.storedData.push({
       "level": this.levelCal, "score": this.level * 15, "lines": this.level,
-      "rightClicks": this.rightClicks, "downClicks": this.downClicks, "upClicks": this.upClicks, "leftClicks": this.leftClicks,"mode":this.currentMode,"times":localStorage.getItem("times")
+      "rightClicks": this.rightClicks, "downClicks": this.downClicks, "upClicks": this.upClicks, "leftClicks": this.leftClicks, "mode": this.currentMode, "times": localStorage.getItem("times")
     });
     localStorage.setItem("score", JSON.stringify(this.storedData))
   }
   music() {
-    if(this.currentMode!="withoutMusic"){
-    if (this.gameStarted) {
-      this.audio.play();
+    if (this.currentMode != "withoutMusic") {
+      if (this.gameStarted) {
+        this.audio.play();
+      }
+      // audio.pause()
+      else {
+        this.audio.pause()
+      }
     }
-    // audio.pause()
-    else {
-      this.audio.pause()
-    }
-  }
-    
+
   }
   //to go to next page
-  nextPage(){
-    this.isTutorial=localStorage.getItem("isTutorial")
-    if (this.isTutorial!="true") {
-      if (localStorage.getItem("times")=="2") {
-        console.log("Df");
+  nextPage() {
+    this.isTutorial = localStorage.getItem("isTutorial")
+    if (this.isTutorial != "true") {
+      if (localStorage.getItem("times") == "2") {
         this.storeGameData()
         this.router.navigate(['feedback'])
       } else {
         location.reload()
-        localStorage.setItem("isModeSelected","false");
-    
+        localStorage.setItem("isModeSelected", "false");
+
       }
     } else {
       this.storeGameData()
