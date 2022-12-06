@@ -38,7 +38,7 @@
     <br>
     <div class="flex justify-content-center align-items-center">
         <p-card styleClass="questionCard">
-            <p class="question"> 4. Have you ever played Tetris game before?&nbsp;<span style="color: red;">*</span>
+            <p class="question"> 4. Have you ever played Tetris before?&nbsp;<span style="color: red;">*</span>
             </p>
             <div *ngFor="let option of isPlayedOptions" class="field-checkbox">
                 <p-radioButton [inputId]="option.key" name="option" [(ngModel)]="played" [value]="option.key"  (onClick)="expLevel=''">
