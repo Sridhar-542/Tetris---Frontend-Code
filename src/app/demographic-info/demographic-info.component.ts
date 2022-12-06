@@ -10,12 +10,12 @@ import { Router } from '@angular/router';
 
 export class DemographicInfoComponent implements OnInit {
   @HostListener("window:beforeunload", ["$event"]) unloadHandler(event: Event) {
-    this.data={age:this.age,gender:this.gender,played:this.played,genderDes:this.genderDes,nationality:this.nationality,expLevel:this.expLevel,input:this.input}
+    this.data={age:this.age,gender:this.gender,played:this.played,genderDes:this.genderDes,nationality:this.nationality,expLevel:this.expLevel,input:this.input,inputDes:this.inputDes}
     localStorage.setItem("userData",JSON.stringify(this.data))
   }
   @HostListener('window:popstate', ['$event'])
   onPopState(event) {
-    this.data={age:this.age,gender:this.gender,played:this.played,genderDes:this.genderDes,nationality:this.nationality,expLevel:this.expLevel,input:this.input}
+    this.data={age:this.age,gender:this.gender,played:this.played,genderDes:this.genderDes,nationality:this.nationality,expLevel:this.expLevel,input:this.input,inputDes:this.inputDes}
     localStorage.setItem("userData",JSON.stringify(this.data))
   }
   lastPage: string;
@@ -26,6 +26,7 @@ export class DemographicInfoComponent implements OnInit {
   nationality:string='';
   expLevel:string='';
   input:string='';
+  inputDes:string='';
   data:any={};
   justifyOptions = [
     { key: '', value: '' },
@@ -60,6 +61,7 @@ export class DemographicInfoComponent implements OnInit {
     this.nationality='';
     this.expLevel='';
     this.input='';
+    this.inputDes='';
     }
     else{
     this.age=this.data.age==null?'':this.data.age;
@@ -69,10 +71,11 @@ export class DemographicInfoComponent implements OnInit {
     this.nationality=this.data.nationality==null?'':this.data.nationality;
     this.genderDes=this.data.genderDes==null?'':this.data.genderDes;
     this.played=this.data.played==null?'':this.data.played;
+    this.inputDes=this.data.inputDes==null?'':this.data.inputDes;
     }
   }
   nextPage(){
-    this.data={age:this.age,gender:this.gender,played:this.played,genderDes:this.genderDes,nationality:this.nationality,expLevel:this.expLevel,input:this.input}
+    this.data={age:this.age,gender:this.gender,played:this.played,genderDes:this.genderDes,nationality:this.nationality,expLevel:this.expLevel,input:this.input,inputDes:this.inputDes}
     localStorage.setItem("userData",JSON.stringify(this.data))
     this.router.navigate(["tutInstructions"]);
   }

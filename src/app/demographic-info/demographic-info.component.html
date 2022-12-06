@@ -65,15 +65,18 @@
         <p-card styleClass="questionCard">
             <p class="question"> 5. Which input do you usually use to play Tetris?&nbsp;<span style="color: red;">*</span></p>
             <div *ngFor="let option of inputOptions" class="field-checkbox">
-                <p-radioButton [inputId]="option.key" name="option" [(ngModel)]="input" [value]="option.key">
+                <p-radioButton [inputId]="option.key" name="option" [(ngModel)]="input" [value]="option.key" (onClick)="inputDes=''">
                 </p-radioButton>
                 <label [for]="option.key">{{option.name}}</label>
+            </div>
+            <div *ngIf="input=='D'">
+                <input type="text" pInputText [(ngModel)]="inputDes" />
             </div>
         </p-card>
     </div>
     <br>
     <div class="flex justify-content-center align-items-center"
-        *ngIf="age!=''&&gender!=''&&played!=''&&((gender=='E'&&genderDes!='')||gender!='E')&&nationality!=''&&((played=='A'&&expLevel!='')||played!='A')&&input!=''">
+        *ngIf="age!=''&&gender!=''&&played!=''&&((gender=='E'&&genderDes!='')||gender!='E')&&nationality!=''&&((played=='A'&&expLevel!='')||played!='A')&&((input=='D'&&inputDes!='')||input!='D')&&input!=''">
         <p-card styleClass="questionCard">
             <div class="flex justify-content-end">
                 <p-button label="Submit" (click)="nextPage()"></p-button>
