@@ -61,6 +61,7 @@ export class BoardComponent implements OnInit {
   upClicks: number = 0;
   leftClicks: number = 0;
   rightClicks: number = 0;
+  spacebarClicks: number = 0;
   lastPage: string;
   audio: HTMLAudioElement;
   currentMode: string;
@@ -112,6 +113,9 @@ export class BoardComponent implements OnInit {
     }
     else if (event.key == "ArrowRight") {
       this.rightClicks = this.rightClicks + 1;
+    }
+    else if (event.key == " ") {
+      this.spacebarClicks = this.spacebarClicks + 1;
     }
 
   }
@@ -429,7 +433,7 @@ export class BoardComponent implements OnInit {
     this.storedData = JSON.parse(localStorage.getItem("score"));
     this.storedData.push({
       "level": this.levelCal, "score": this.level * 15, "lines": this.level,
-      "rightClicks": this.rightClicks, "downClicks": this.downClicks, "upClicks": this.upClicks, "leftClicks": this.leftClicks, "mode": this.currentMode, "times": localStorage.getItem("times")
+      "rightClicks": this.rightClicks, "downClicks": this.downClicks, "upClicks": this.upClicks, "leftClicks": this.leftClicks, "spacebarClicks": this.spacebarClicks, "mode": this.currentMode, "times": localStorage.getItem("times")
     });
     localStorage.setItem("score", JSON.stringify(this.storedData))
   }
