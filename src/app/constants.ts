@@ -63,24 +63,24 @@ export class POINTS {
 
 export class LEVEL {
   static readonly 0 = 800;
-  static readonly 1 = 720;
-  static readonly 2 = 630;
-  static readonly 3 = 550;
-  static readonly 4 = 470;
-  static readonly 5 = 380;
-  static readonly 6 = 300;
-  static readonly 7 = 220;
-  static readonly 8 = 130;
-  static readonly 9 = 100;
-  static readonly 10 = 80;
-  static readonly 11 = 80;
-  static readonly 12 = 80;
-  static readonly 13 = 70;
-  static readonly 14 = 70;
-  static readonly 15 = 70;
-  static readonly 16 = 50;
-  static readonly 17 = 50;
-  static readonly 18 = 50;
+  static readonly 1 = 680;
+  static readonly 2 = 560;
+  static readonly 3 = 440;
+  static readonly 4 = 320;
+  static readonly 5 = 200;
+  static readonly 6 = 80;
+  static readonly 7 = 80;
+  static readonly 8 = 70;
+  static readonly 9 = 70;
+  static readonly 10 = 60;
+  static readonly 11 = 60;
+  static readonly 12 = 50;
+  static readonly 13 = 50;
+  static readonly 14 = 40;
+  static readonly 15 = 40;
+  static readonly 16 = 30;
+  static readonly 17 = 30;
+  static readonly 18 = 30;
   static readonly 19 = 30;
   static readonly 20 = 30;
   // 29+ is 20ms

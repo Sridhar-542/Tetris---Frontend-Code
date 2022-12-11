@@ -7,11 +7,11 @@
   <div *ngIf="currentMode!='withoutMusic'">
     <div *ngFor="let question of withMusicQuestions,let i=index">
       <p-card styleClass="questionCard" *ngIf="withMusicQuestions[i].key!='Follow_up_for_General_ques_VI'">
-        <p class="question">{{question.value}}</p>
+        <p class="question">{{question.value}}&nbsp;<span style="color: red;">*</span></p>
         <div class="flex justify-content-start flex-wrap gap-4">
           <div *ngFor="let option of justifyOptions" class="field-checkbox">
             <div>
-              <label [for]="option.key">{{option.name}}</label>
+              <label>{{option.name}}</label>
               <br><br>
               <div style="display: flex;" class="justify-content-center">
                 <p-radioButton [inputId]="option.key" name="category" [value]="option.key"
@@ -24,7 +24,7 @@
       </p-card>
       <!-- <br> -->
        <p-card styleClass="questionCard" *ngIf="((withMusicQuestions[i-1]?.selectedOption=='6'||withMusicQuestions[i-1]?.selectedOption=='7')&&(withMusicQuestions[i].key=='Follow_up_for_General_ques_VI'))">
-        <p class="question">{{withMusicQuestions[i].value}}</p>
+        <p class="question">{{withMusicQuestions[i].value}}&nbsp;<span style="color: red;">*</span></p>
         <!-- <input type="text" pInputText /> -->
         <textarea [rows]="2" style="width: 80vw;" pInputTextarea [autoResize]="true"
           [(ngModel)]="withMusicQuestions[i].selectedOption"></textarea>
@@ -42,11 +42,11 @@
   <div *ngIf="currentMode=='withoutMusic'">
     <div *ngFor="let question of withOutMusicQuestions">
       <p-card styleClass="questionCard">
-        <p class="question">{{question.value}}</p>
+        <p class="question">{{question.value}}&nbsp;<span style="color: red;">*</span></p>
         <div class="flex justify-content-start flex-wrap gap-4">
           <div *ngFor="let option of justifyOptions" class="field-checkbox">
             <div>
-              <label [for]="option.key">{{option.name}}</label>
+              <label >{{option.name}}</label>
               <br><br>
               <div style="display: flex;" class="justify-content-center">
                 <p-radioButton [inputId]="option.key" name="category" [value]="option.key"

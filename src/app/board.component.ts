@@ -79,7 +79,7 @@ export class BoardComponent implements OnInit {
     this.audio.pause();
 
   }
-  @HostListener('window:keydown', ['$event'])
+  @HostListener('window:keyup', ['$event'])
   keyEvent(event: KeyboardEvent) {
     if (event.keyCode === KEY.ESC) {
       this.gameOver();
@@ -96,17 +96,17 @@ export class BoardComponent implements OnInit {
         }
       } else if (this.service.valid(p, this.board)) {
         this.piece.move(p);
-        if (event.keyCode === KEY.DOWN) {
+        if (event.keyCode === KEY.UP) {
           //this.points += POINTS.SOFT_DROP;
         }
       }
     }
     //To count key strokes
-    if (event.key == "ArrowDown") {
-      this.downClicks = this.downClicks + 1;
-
-    } else if (event.key == "ArrowUp") {
+    if (event.key == "ArrowUp") {
       this.upClicks = this.upClicks + 1;
+
+    } else if (event.key == "ArrowDown") {
+      this.downClicks = this.downClicks + 1;
     }
     else if (event.key == "ArrowLeft") {
       this.leftClicks = this.leftClicks + 1;
@@ -317,11 +317,13 @@ export class BoardComponent implements OnInit {
       this.points += this.service.getLinesClearedPoints(lines, this.level);
       this.lines += lines;
       if (this.lines >= 1) {
-        this.level++;
-        //To get level for each 3 lines clear level will increase
-        this.levelCal = Math.floor(this.level / 3)
-        this.lines -= 1;
-        if (this.levelCal >= 1) {
+        //To get level for each 2 lines clear level will increase
+        this.level= (this.level * 2 + lines)/ 2;
+         this.levelCal = Math.floor(this.level)
+        console.log(this.level, this.levelCal);
+       // this.lines -= 1;
+        if (this.level >= 1) {
+          // To increase/regulate speed
           this.time.level = LEVEL[this.levelCal] / 2;
         }
       }
@@ -432,7 +434,7 @@ export class BoardComponent implements OnInit {
   storeGameData() {
     this.storedData = JSON.parse(localStorage.getItem("score"));
     this.storedData.push({
-      "level": this.levelCal, "score": this.level * 15, "lines": this.level,
+      "level": this.levelCal, "score": this.lines * 15, "lines": this.lines,
       "rightClicks": this.rightClicks, "downClicks": this.downClicks, "upClicks": this.upClicks, "leftClicks": this.leftClicks, "spacebarClicks": this.spacebarClicks, "mode": this.currentMode, "times": localStorage.getItem("times")
     });
     localStorage.setItem("score", JSON.stringify(this.storedData))

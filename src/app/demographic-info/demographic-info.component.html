@@ -9,7 +9,7 @@
             <div *ngFor="let option of ageOptions" class="field-checkbox">
                 <p-radioButton [inputId]="option.key" name="option" [(ngModel)]="age" [value]="option.key">
                 </p-radioButton>
-                <label [for]="option.key">{{option.name}}</label>
+                <label>{{option.name}}</label>
             </div>
         </p-card>
     </div>
@@ -21,7 +21,7 @@
             <div *ngFor="let option of genderOptions" class="field-checkbox">
                 <p-radioButton [inputId]="option.key" name="option" [(ngModel)]="gender" [value]="option.key" (onClick)="genderDes=''">
                 </p-radioButton>
-                <label [for]="option.key">{{option.name}}</label>
+                <label>{{option.name}}</label>
             </div>
             <div *ngIf="gender=='E'">
                 <input type="text" pInputText [(ngModel)]="genderDes" />
@@ -43,7 +43,7 @@
             <div *ngFor="let option of isPlayedOptions" class="field-checkbox">
                 <p-radioButton [inputId]="option.key" name="option" [(ngModel)]="played" [value]="option.key"  (onClick)="expLevel=''">
                 </p-radioButton>
-                <label [for]="option.key">{{option.name}}</label>
+                <label>{{option.name}}</label>
             </div>
             <div *ngIf="played=='A'">
                 <p class="question">What is your level of experience in playing Tetris?&nbsp;<span style="color: red;">*</span><br>
@@ -67,7 +67,7 @@
             <div *ngFor="let option of inputOptions" class="field-checkbox">
                 <p-radioButton [inputId]="option.key" name="option" [(ngModel)]="input" [value]="option.key" (onClick)="inputDes=''">
                 </p-radioButton>
-                <label [for]="option.key">{{option.name}}</label>
+                <label>{{option.name}}</label>
             </div>
             <div *ngIf="input=='D'">
                 <input type="text" pInputText [(ngModel)]="inputDes" />
