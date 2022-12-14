@@ -79,7 +79,7 @@ export class BoardComponent implements OnInit {
     this.audio.pause();
 
   }
-  @HostListener('window:keyup', ['$event'])
+  @HostListener('window:keydown', ['$event'])
   keyEvent(event: KeyboardEvent) {
     if (event.keyCode === KEY.ESC) {
       this.gameOver();
@@ -96,17 +96,23 @@ export class BoardComponent implements OnInit {
         }
       } else if (this.service.valid(p, this.board)) {
         this.piece.move(p);
-        if (event.keyCode === KEY.UP) {
+        if (event.keyCode === KEY.DOWN) {
           //this.points += POINTS.SOFT_DROP;
         }
       }
     }
+  }
+  
+  @HostListener('window:keyup', ['$event'])
+  keyEventCount(event: KeyboardEvent) {
+    console.log(event);
+    
     //To count key strokes
-    if (event.key == "ArrowUp") {
-      this.upClicks = this.upClicks + 1;
-
-    } else if (event.key == "ArrowDown") {
+    if (event.key == "ArrowDown") {
       this.downClicks = this.downClicks + 1;
+
+    } else if (event.key == "ArrowUp") {
+      this.upClicks = this.upClicks + 1;
     }
     else if (event.key == "ArrowLeft") {
       this.leftClicks = this.leftClicks + 1;
@@ -117,7 +123,6 @@ export class BoardComponent implements OnInit {
     else if (event.key == " ") {
       this.spacebarClicks = this.spacebarClicks + 1;
     }
-
   }
 
   constructor(private service: GameService, private router: Router) {

@@ -39,10 +39,10 @@ export class DemographicInfoComponent implements OnInit {
     { key: '7', value: '7' },
     { key: '', value: '' },
   ];
-  ageOptions: any[] = [{name:'18 - 24', key: 'A'}, {name: '25 - 31', key: 'B'}, {name: '32 - 38', key: 'C'}, {name: '39 - 45', key: 'D'}, {name: '46 - 52', key: 'E'},{name: '53 - 59', key: 'F'},{name: '60 and above', key: 'G'}];
-  genderOptions: any[] = [{name:'Male', key: 'A'}, {name: 'Female', key: 'B'}, {name: 'Non-Binary', key: 'C'}, {name: 'Prefer not to disclose', key: 'D'},{name: 'Self-describe', key: 'E'}];
-  isPlayedOptions: any[]=[{name:'Yes', key: 'A'}, {name: 'No', key: 'B'}]
-  inputOptions: any[] = [{name:'Keyboard', key: 'A'}, {name: 'Gamepad', key: 'B'}, {name: 'Touchscreen', key: 'C'}, {name: 'Other', key: 'D'}];
+  ageOptions: any[] = [{name:'18 - 24', key: '1A'}, {name: '25 - 31', key: '1B'}, {name: '32 - 38', key: '1C'}, {name: '39 - 45', key: '1D'}, {name: '46 - 52', key: '1E'},{name: '53 - 59', key: '1F'},{name: '60 and above', key: 'G'}];
+  genderOptions: any[] = [{name:'Male', key: '2A'}, {name: 'Female', key: '2B'}, {name: 'Non-Binary', key: '2C'}, {name: 'Prefer not to disclose', key: '2D'},{name: 'Self-describe', key: '2E'}];
+  isPlayedOptions: any[]=[{name:'Yes', key: '4A'}, {name: 'No', key: '4B'}]
+  inputOptions: any[] = [{name:'Keyboard', key: '5A'}, {name: 'Gamepad', key: '5B'}, {name: 'Touchscreen', key: '5C'}, {name: 'Other', key: '5D'}];
   constructor(private router:Router) { 
     this.lastPage=localStorage.getItem("currentPage")
     if (this.lastPage!="home") {
@@ -56,9 +56,9 @@ export class DemographicInfoComponent implements OnInit {
     if (this.data==null) {
       this.age='';
     this.gender='';
-    this.played='';
     this.genderDes='';
     this.nationality='';
+    this.played='';
     this.expLevel='';
     this.input='';
     this.inputDes='';
@@ -66,16 +66,16 @@ export class DemographicInfoComponent implements OnInit {
     else{
     this.age=this.data.age==null?'':this.data.age;
     this.gender=this.data.gender==null?'':this.data.gender;
-    this.input=this.data.input==null?'':this.data.input;
-    this.expLevel=this.data.expLevel==null?'':this.data.expLevel;
-    this.nationality=this.data.nationality==null?'':this.data.nationality;
     this.genderDes=this.data.genderDes==null?'':this.data.genderDes;
+    this.nationality=this.data.nationality==null?'':this.data.nationality;
     this.played=this.data.played==null?'':this.data.played;
+    this.expLevel=this.data.expLevel==null?'':this.data.expLevel;
+    this.input=this.data.input==null?'':this.data.input;
     this.inputDes=this.data.inputDes==null?'':this.data.inputDes;
     }
   }
   nextPage(){
-    this.data={age:this.age,gender:this.gender,played:this.played,genderDes:this.genderDes,nationality:this.nationality,expLevel:this.expLevel,input:this.input,inputDes:this.inputDes}
+    this.data={age:this.age,gender:this.gender,genderDes:this.genderDes,nationality:this.nationality,played:this.played,expLevel:this.expLevel,input:this.input,inputDes:this.inputDes}
     localStorage.setItem("userData",JSON.stringify(this.data))
     this.router.navigate(["tutInstructions"]);
   }

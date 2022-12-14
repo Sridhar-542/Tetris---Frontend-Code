@@ -9,7 +9,7 @@
             <div *ngFor="let option of ageOptions" class="field-checkbox">
                 <p-radioButton [inputId]="option.key" name="option" [(ngModel)]="age" [value]="option.key">
                 </p-radioButton>
-                <label>{{option.name}}</label>
+                <label [for]="option.key">{{option.name}}</label>
             </div>
         </p-card>
     </div>
@@ -21,9 +21,9 @@
             <div *ngFor="let option of genderOptions" class="field-checkbox">
                 <p-radioButton [inputId]="option.key" name="option" [(ngModel)]="gender" [value]="option.key" (onClick)="genderDes=''">
                 </p-radioButton>
-                <label>{{option.name}}</label>
+                <label [for]="option.key">{{option.name}}</label>
             </div>
-            <div *ngIf="gender=='E'">
+            <div *ngIf="gender=='2E'">
                 <input type="text" pInputText [(ngModel)]="genderDes" />
             </div>
         </p-card>
@@ -43,9 +43,9 @@
             <div *ngFor="let option of isPlayedOptions" class="field-checkbox">
                 <p-radioButton [inputId]="option.key" name="option" [(ngModel)]="played" [value]="option.key"  (onClick)="expLevel=''">
                 </p-radioButton>
-                <label>{{option.name}}</label>
+                <label [for]="option.key">{{option.name}}</label>
             </div>
-            <div *ngIf="played=='A'">
+            <div *ngIf="played=='4A'">
                 <p class="question">What is your level of experience in playing Tetris?&nbsp;<span style="color: red;">*</span><br>
                     <!-- <input type="text" pInputText [(ngModel)]="expLevel" /> -->
                     <div class="flex align-items-center">
@@ -67,16 +67,16 @@
             <div *ngFor="let option of inputOptions" class="field-checkbox">
                 <p-radioButton [inputId]="option.key" name="option" [(ngModel)]="input" [value]="option.key" (onClick)="inputDes=''">
                 </p-radioButton>
-                <label>{{option.name}}</label>
+                <label [for]="option.key">{{option.name}}</label>
             </div>
-            <div *ngIf="input=='D'">
+            <div *ngIf="input=='5D'">
                 <input type="text" pInputText [(ngModel)]="inputDes" />
             </div>
         </p-card>
     </div>
     <br>
     <div class="flex justify-content-center align-items-center"
-        *ngIf="age!=''&&gender!=''&&played!=''&&((gender=='E'&&genderDes!='')||gender!='E')&&nationality!=''&&((played=='A'&&expLevel!='')||played!='A')&&((input=='D'&&inputDes!='')||input!='D')&&input!=''">
+        *ngIf="age!=''&&gender!=''&&played!=''&&((gender=='2E'&&genderDes!='')||gender!='2E')&&nationality!=''&&((played=='4A'&&expLevel!='')||played!='4A')&&((input=='5D'&&inputDes!='')||input!='5D')&&input!=''">
         <p-card styleClass="questionCard">
             <div class="flex justify-content-end">
                 <p-button label="Submit" (click)="nextPage()"></p-button>
