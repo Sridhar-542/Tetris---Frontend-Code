@@ -322,8 +322,8 @@ export class BoardComponent implements OnInit {
       this.points += this.service.getLinesClearedPoints(lines, this.level);
       this.lines += lines;
       if (this.lines >= 1) {
-        //To get level for each 2 lines clear level will increase
-        this.level= (this.level * 2 + lines)/ 2;
+        //To get level for each 3 lines clear level will increase
+        this.level= (this.level * 3 + lines)/ 3;
          this.levelCal = Math.floor(this.level)
         console.log(this.level, this.levelCal);
        // this.lines -= 1;
