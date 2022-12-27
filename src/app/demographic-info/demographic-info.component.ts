@@ -75,7 +75,7 @@ export class DemographicInfoComponent implements OnInit {
     }
   }
   nextPage(){
-    this.data={age:this.age,gender:this.gender,genderDes:this.genderDes,nationality:this.nationality,played:this.played,expLevel:this.expLevel,input:this.input,inputDes:this.inputDes}
+    this.data={age:this.age,gender:this.gender,genderDes:this.genderDes.trim(),nationality:this.nationality.trim(),played:this.played,expLevel:this.expLevel,input:this.input,inputDes:this.inputDes.trim()}
     localStorage.setItem("userData",JSON.stringify(this.data))
     this.router.navigate(["tutInstructions"]);
   }

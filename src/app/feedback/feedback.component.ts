@@ -24,6 +24,7 @@ export class FeedbackComponent implements OnInit {
   lastPage: string;
   music: string;
   data: any = {};
+  isBtnClicked:boolean;
   data1 = [
     { key: 'General_ques_I', value: 'I like the song that was played during the game' },
     { key: 'General_ques_II', value: 'I enjoyed listening to the background music' },
@@ -82,7 +83,7 @@ export class FeedbackComponent implements OnInit {
     { key: 'IMI_Enjoyment_VII', value: 'While I was playing this game, I was thinking about how much I enjoyed it' },
   ]
   justifyOptions: any[] = [
-    { name: 'Strongly disagree', key: '1' },
+    { name: 'Strongly Disagree', key: '1' },
     { name: 'Disagree', key: '2' },
     { name: 'Somewhat Disagree', key: '3' },
     { name: 'Neither Agree nor Disagree', key: '4' },
@@ -133,6 +134,7 @@ export class FeedbackComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.isBtnClicked=false;
     localStorage.setItem("currentPage", "feedback");
     this.data = JSON.parse(localStorage.getItem(`${this.currentMode}Data`));
     //Patching on refresh/Back navigation
@@ -153,15 +155,16 @@ export class FeedbackComponent implements OnInit {
     this.data = { mode: this.currentMode };
     if (this.currentMode != 'withoutMusic') {
       this.withMusicQuestions.map((res) => {
-        this.data[res.key] = res.selectedOption;
+        this.data[res.key] = res.selectedOption.trim();
       })
     } else {
       this.withOutMusicQuestions.map((res) => {
-        this.data[res.key] = res.selectedOption;
+        this.data[res.key] = res.selectedOption.trim();
       })
     }
   }
   submitFeedback() {
+    this.isBtnClicked=true;
     //need to add mode
     this.extractSelectedData();
     //To show answer all quetions alert
@@ -187,7 +190,7 @@ export class FeedbackComponent implements OnInit {
       this.withMusicQuestions.every(
         function (element, index) {
           // return true
-          if (element.selectedOption == undefined || element.selectedOption == '' || element.selectedOption == null) {
+          if (element.selectedOption == undefined || element.selectedOption.trim() == '' || element.selectedOption == null) {
             if (element.key == 'Follow_up_for_General_ques_VI' && impactQueAns != '6' && impactQueAns != '7') {
               isAllSelected = true;
               return true

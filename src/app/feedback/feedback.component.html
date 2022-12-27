@@ -3,7 +3,8 @@
   <div class="flex justify-content-center align-items-center">
     <h1 style="color: #2196F3;">Experience questionnaire</h1>
   </div>
-  <h3 style="color: #495057;">&nbsp; To what extent do you agree with the following statements&nbsp;<span style="color: red;">*</span></h3>
+  <h3 style="color: #495057;">&nbsp; To what extent do you agree with the following statements&nbsp;<span
+      style="color: red;">*</span></h3>
   <div *ngIf="currentMode!='withoutMusic'">
     <div *ngFor="let question of withMusicQuestions,let i=index">
       <p-card styleClass="questionCard" *ngIf="withMusicQuestions[i].key!='Follow_up_for_General_ques_VI'">
@@ -11,8 +12,10 @@
         <div class="flex justify-content-start flex-wrap gap-4">
           <div *ngFor="let option of justifyOptions, let j= index" class="field-checkbox">
             <div>
-              <label [for] = "i+'a'+j">{{option.name}}</label>
-              <br><br>
+              <div style="width: 6.71rem;height: 3rem;text-align: center;">
+                <label [for]="i+'a'+j">{{option.name}}</label>
+              </div>
+              <br>
               <div style="display: flex;" class="justify-content-center">
                 <p-radioButton [inputId]="i+'a'+j" name="category" [value]="option.key"
                   [(ngModel)]="question.selectedOption">
@@ -21,13 +24,20 @@
             </div>
           </div>
         </div>
+        <div *ngIf="isBtnClicked&&(question.selectedOption.trim()==''||question.selectedOption==null)" style="color: red;">
+          <strong>Please select an option</strong>
+        </div>
       </p-card>
       <!-- <br> -->
-       <p-card styleClass="questionCard" *ngIf="((withMusicQuestions[i-1]?.selectedOption=='6'||withMusicQuestions[i-1]?.selectedOption=='7')&&(withMusicQuestions[i].key=='Follow_up_for_General_ques_VI'))">
+      <p-card styleClass="questionCard"
+        *ngIf="((withMusicQuestions[i-1]?.selectedOption=='6'||withMusicQuestions[i-1]?.selectedOption=='7')&&(withMusicQuestions[i].key=='Follow_up_for_General_ques_VI'))">
         <p class="question">{{withMusicQuestions[i].value}}&nbsp;<span style="color: red;">*</span></p>
         <!-- <input type="text" pInputText /> -->
-        <textarea [rows]="2" style="width: 80vw;" pInputTextarea [autoResize]="true"
+        <textarea [rows]="2" style="width: 80vw;" pInputTextarea [autoResize]="true" 
           [(ngModel)]="withMusicQuestions[i].selectedOption"></textarea>
+          <div *ngIf="isBtnClicked&&(withMusicQuestions[i].selectedOption.trim()==''||withMusicQuestions[i].selectedOption==null )" style="color: red;">
+            <strong>Please enter your answer here</strong>
+          </div>
       </p-card>
       <br>
     </div>
@@ -46,8 +56,11 @@
         <div class="flex justify-content-start flex-wrap gap-4">
           <div *ngFor="let option of justifyOptions, let j=index" class="field-checkbox">
             <div>
-              <label [for] = "i+'a'+j" >{{option.name}}</label>
-              <br><br>
+              <div style="width: 6.71rem;height: 3rem;text-align: center;">
+
+              <label [for]="i+'a'+j">{{option.name}}</label>
+              </div>
+              <br>
               <div style="display: flex;" class="justify-content-center">
                 <p-radioButton [inputId]="i+'a'+j" name="category" [value]="option.key"
                   [(ngModel)]="question.selectedOption">
@@ -55,6 +68,9 @@
               </div>
             </div>
           </div>
+        </div>
+        <div *ngIf="isBtnClicked&&(question.selectedOption.trim()==''||question.selectedOption==null)" style="color: red;">
+          <strong>Please select an option</strong>
         </div>
       </p-card>
       <br>

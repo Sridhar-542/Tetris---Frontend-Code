@@ -76,7 +76,7 @@
     </div>
     <br>
     <div class="flex justify-content-center align-items-center"
-        *ngIf="age!=''&&gender!=''&&played!=''&&((gender=='2E'&&genderDes!='')||gender!='2E')&&nationality!=''&&((played=='4A'&&expLevel!='')||played!='4A')&&((input=='5D'&&inputDes!='')||input!='5D')&&input!=''">
+        *ngIf="age!=''&&gender!=''&&played!=''&&((gender=='2E'&&genderDes.trim()!='')||gender!='2E')&&nationality.trim()!=''&&((played=='4A'&&expLevel!='')||played!='4A')&&((input=='5D'&&inputDes.trim()!='')||input!='5D')&&input!=''">
         <p-card styleClass="questionCard">
             <div class="flex justify-content-end">
                 <p-button label="Submit" (click)="nextPage()"></p-button>
