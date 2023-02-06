@@ -190,7 +190,7 @@ export class BoardComponent implements OnInit {
       this.seed.seedString = "Saarbrücken"
       this.seed.setString()
     } else if (this.currentMode != "tutorial" && remainingModes.includes(this.currentMode)) {
-      this.seed.seedString = "Neunkirchen"
+      this.seed.seedString = "Paderborn"
       this.seed.setString()
     }
     else {
