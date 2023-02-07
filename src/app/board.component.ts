@@ -40,6 +40,7 @@ export class BoardComponent implements OnInit {
   paused: boolean;
   levelCal: number = 0;
   seed = new RandomSeedService;
+  isSpace: boolean = false;
 
   gameStarted: boolean;
   time: { start: number; elapsed: number; level: number };
@@ -81,6 +82,7 @@ export class BoardComponent implements OnInit {
   }
   @HostListener('window:keydown', ['$event'])
   keyEvent(event: KeyboardEvent) {
+    this.isSpace = false;
     if (event.keyCode === KEY.ESC) {
       this.gameOver();
     } else if (this.moves[event.keyCode]) {
@@ -89,6 +91,7 @@ export class BoardComponent implements OnInit {
       let p = this.moves[event.keyCode](this.piece);
       if (event.keyCode === KEY.SPACE) {
         // Hard drop
+        this.isSpace = true;
         while (this.service.valid(p, this.board)) {
           //this.points += POINTS.HARD_DROP;
           this.piece.move(p);
@@ -273,7 +276,8 @@ export class BoardComponent implements OnInit {
 
   animate(now = 0) {
     this.time.elapsed = now - this.time.start;
-    if (this.time.elapsed > this.time.level) {
+    let p = this.moves[KEY.DOWN](this.piece);
+    if (this.time.elapsed > this.time.level||! (this.service.valid(p, this.board)|| !this.isSpace )) {
       this.time.start = now;
       if (!this.drop()) {
         this.gameOver();
