@@ -95,7 +95,7 @@
       }
     }
   },
-  "defaultProject": "ng-tetris",
+  
   "cli": {
     "analytics": false
   }
